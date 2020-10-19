@@ -11,6 +11,7 @@ namespace Tutorial.Car.BL.Services
         Task<CarDTO[]> GetAllAsync();
         Task CreateAsync(CarDTO carDTO);
         Task RemoveAsync(long carId);
+        Task<CarDTO> GetByIdAsync(int id);
     }
 
     public class CarService: ICarService
@@ -36,6 +37,11 @@ namespace Tutorial.Car.BL.Services
         public async Task RemoveAsync(long carId)
         {
             await _carRepository.RemoveAsync(carId);
+        }
+        public async Task<CarDTO> GetByIdAsync(int id)
+        
+        {
+            return await _carRepository.GetByIdAsync(id);
         }
     }
 }

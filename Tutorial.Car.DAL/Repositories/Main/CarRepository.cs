@@ -27,7 +27,23 @@ namespace Tutorial.Car.DAL.Repositories.Main
             {
                 try
                 {
-                    return await connection.QueryArrayAsync<CarDTO>(CarQueries.GetAll);
+                    return await connection.QueryDefaultEmptyAsync<CarDTO>(CarQueries.GetAll);
+                }
+                catch (System.Exception ex)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        public async Task<CarDTO> GetByIdAsync(int id)
+        {
+            using (var connection = _connectionFactory.GetOpenedConnection())
+            {
+                try
+                {
+                    return await connection.QueryFirstOrDefaultAsync<CarDTO>(CarQueries.GetById, new { ID = id });
                 }
                 catch (System.Exception ex)
                 {
@@ -57,17 +73,17 @@ namespace Tutorial.Car.DAL.Repositories.Main
                 return await connection.QueryFirstOrDefaultAsync<bool>(CarQueries.IsUniqueDescription, new { Description = description });
             }
         }
-        public async Task RemoveAsync(long carId)
-        {
-            await _helperRepository.DeleteAsync(carId, "Channels");
-        }
-
         //public async Task RemoveAsync(long carId)
         //{
-        //    using (var connection = _connectionFactory.GetOpenedConnection())
-        //    {               
-        //        await connection.QueryFirstOrDefaultAsync(CarQueries.Remove);                
-        //    }
+        //    await _helperRepository.DeleteAsync(carId, "Channels");
         //}
+
+        public async Task RemoveAsync(long carId)
+        {
+            using (var connection = _connectionFactory.GetOpenedConnection())
+            {
+                await connection.QueryFirstOrDefaultAsync(CarQueries.Remove, new { ID = carId });
+            }
+        }
     }
 }

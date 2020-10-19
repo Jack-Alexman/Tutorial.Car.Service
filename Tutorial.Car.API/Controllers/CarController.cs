@@ -24,9 +24,15 @@ namespace Tutorial.Car.API.Controllers
             await _carService.CreateAsync(carDTO);
         }
 
-        [HttpDelete("{id}")]
+        [HttpGet]
         public async Task Remove([FromQuery] long id){
             await _carService.RemoveAsync(id);
+        }
+
+        [HttpGet]
+        public async Task<CarDTO> GetById([FromQuery] int id)
+        {
+            return await _carService.GetByIdAsync(id);
         }
     }
 }

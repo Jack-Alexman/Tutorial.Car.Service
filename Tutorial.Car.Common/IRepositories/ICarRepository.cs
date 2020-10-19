@@ -10,5 +10,6 @@ namespace Tutorial.Car.Common.IRepositories
         Task<bool> IsUniqueModelAsync(string model);
         Task<bool> IsUniqueDescriptionAsync(string description);
         Task RemoveAsync(long carId);
+        Task<CarDTO> GetByIdAsync(int id);
     }
 }

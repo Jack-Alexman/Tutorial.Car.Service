@@ -11,6 +11,16 @@
               FROM [Tutorial.Car.Dev].[dbo].[Channels]
         ";
 
+        public static readonly string GetById = $@"
+            SELECT [ID]
+                  ,[Description]
+                  ,[CarModel]
+                  ,[CompanyName]
+                  ,[Count]
+              FROM [Tutorial.Car.Dev].[dbo].[Channels]
+                WHERE [ID] = @Id
+        ";
+
         public static readonly string Create = $@"
             insert into [Tutorial.Car.Dev].[dbo].[Channels]
 		        ([Description], [CarModel], [Count])
@@ -40,7 +50,7 @@
         public static readonly string Remove = $@"
               DELETE
                 FROM [Tutorial.Car.Dev].[dbo].[Channels]
-			                where [ID] = @ID
+			                where [ID] = @Id
         ";
 
     }

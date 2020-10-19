@@ -32,7 +32,7 @@ namespace Tutorial.Car.DAL.Helpers
             return data;
         }
 
-        public static async Task<T[]> QueryArrayAsync<T>(this IDbConnection cnn, string sql, object param = null)
+        public static async Task<T[]> QueryDefaultEmptyAsync<T>(this IDbConnection cnn, string sql, object param = null)
         {
             return (await cnn.QueryAsync<T>(sql, param)).ToArray();
         }
